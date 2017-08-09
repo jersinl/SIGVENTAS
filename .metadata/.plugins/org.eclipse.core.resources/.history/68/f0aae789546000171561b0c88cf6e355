@@ -1,0 +1,30 @@
+<%@page import="com.cibertec.edu.EmpleadoController"%>
+<%@page import="entidades.entEmpleado"%>
+     
+<jsp:include page="/WEB-INF/views/includes/masterHeader.jsp"></jsp:include>
+				   
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title" id="myModalLabel">Empleado</h4>
+             </div>
+             <div class="modal-body">
+             
+             <div class="form-group"> 
+
+				¿Esta seguro de eliminar
+				                           			 <span>${emp.idPersona.nombres} ${emp.idPersona.apellidos}</span>
+				con Cargo: <span>${emp.idCargo.nombre}</span> 
+				de la Sucursal : <span>${emp.idSucursal.nombre}</span>? 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a href="${pageContext.request.contextPath}/Empleado/Eliminar?id=${emp.idEmpleado}"><button type="button" class="btn btn-primary">Eliminar</button></a>
+            </div>
+        </div>
+    </div>
+</div> 				 				   
+<jsp:include page="/WEB-INF/views/includes/masterFooter.jsp"></jsp:include>		   

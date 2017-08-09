@@ -1,0 +1,36 @@
+package com.cibertec.edu;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import entidades.entSucursal;
+import negocios.negSucursales;
+
+@Controller
+public class SucursalController {
+
+	@ModelAttribute("sucursales")
+	 public ArrayList<entSucursal> populateCountryList() {
+	   
+	  //Data referencing for java skills list box
+		 ArrayList<entSucursal> sucs = null;
+		 try {
+			sucs = negSucursales.Instancia().ListarSucursales();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}   
+	  return sucs;
+	 }
+	
+}

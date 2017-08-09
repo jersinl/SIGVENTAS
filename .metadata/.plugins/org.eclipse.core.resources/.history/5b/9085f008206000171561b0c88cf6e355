@@ -1,0 +1,62 @@
+package com.cibertec.edu;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import entidades.entEmpleado;
+import entidades.entSucursal;
+import negocios.negEmpleado;
+import negocios.negSucursales;
+
+@Controller
+public class EmpleadoController {
+
+	@RequestMapping(value = "/Empleados/Lista", method = RequestMethod.GET)
+	public ModelAndView Lista(HttpServletRequest req) {		
+		ModelAndView m = new ModelAndView("/Empleados/Listar");	//ruta dentro del WEB-INF
+		try {
+			ArrayList<entEmpleado> listita = 
+					negEmpleado.Instancia().ListarEmpleados();
+			m.addObject("listita", listita);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return m;
+	}
+	
+	@RequestMapping(value = "/Empleado/New", method = RequestMethod.GET)
+	public ModelAndView NuevoEmpleado() { 
+		ModelAndView m = new ModelAndView("/Empleados/Nuevo","command",new entEmpleado());
+		
+		return m;
+
+	}
+	
+	
+	@RequestMapping(value = "/Empleado/GrabarNuevo", method = RequestMethod.POST)
+	public ModelAndView GrabarNuevo(@ModelAttribute entEmpleado emp) { 
+		try {
+			boolean inserto;
+			inserto= negEmpleado.Instancia().insertarEmp(emp);
+			return new ModelAndView("redirect:/Empleados/Listar?msj=Se inserto satisfactoriamente");
+		} catch (Exception e) {
+			return new ModelAndView("redirect:/frmError");	
+		}
+
+	}
+	
+	
+	
+	
+	
+}

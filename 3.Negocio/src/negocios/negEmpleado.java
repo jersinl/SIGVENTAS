@@ -1,0 +1,107 @@
+package negocios;
+
+import java.util.ArrayList;
+
+import datos.daoEmpleado;
+import entidades.entEmpleado;
+
+public class negEmpleado {
+
+	public static negEmpleado _Instancia;
+	private negEmpleado() {};
+	public static negEmpleado Instancia() {
+		if (_Instancia == null) {
+			_Instancia = new negEmpleado();
+		}
+		return _Instancia;
+	}
+	//
+	
+	
+	
+	public entEmpleado VerificarAcceso(String _Usuario, String _Pass) throws Exception {
+		try {
+			entEmpleado u = daoEmpleado.Instancia().VerificarAcceso(_Usuario, _Pass);
+			java.util.Date fechaActual = new java.util.Date();
+			
+			System.out.println(fechaActual);
+			
+			if(u!=null){
+				if(u.getFechaTermino().before(fechaActual)){
+					throw new ArithmeticException("Su usuario no esta dentro de la fecha Limite");
+				}
+			}else{
+				throw new ArithmeticException("usuario o password no valido");	
+			}
+			return u;
+			
+		} catch (Exception e) {
+			throw e; 
+		}
+	}
+	
+	public ArrayList<entEmpleado> ListarEmpleados()throws Exception{
+		try {
+			ArrayList<entEmpleado> o = daoEmpleado.Instancia().ListarEmpleados();
+			System.out.println("(Negocio)Listado ok... ");
+			return o;
+		} catch (Exception e) {
+			throw e; 
+		}
+	
+	}
+	
+	
+	public boolean insertarEmp(entEmpleado emp)throws Exception{
+		
+		boolean insertar = false;
+		try {			
+			insertar = daoEmpleado.Instancia().insertarEmpleado(emp);
+			System.out.println("(Negocio)Registro de Oficina Exitoso... ");				
+		} catch (Exception e) {				
+			System.out.println("(Negocio)error al resgistrar Oficina !!!!!! :(  : "+e);
+			throw e;		
+		}
+	return insertar;		
+	}
+	
+	
+	public boolean EditarEmp(entEmpleado emp)throws Exception{
+		boolean editar = false;
+		try {
+			editar = daoEmpleado.Instancia().EditarEmpleado(emp);			
+		} catch (Exception e) {				
+			System.out.println("(Negocio)Error al actualizar oficina !!!!!! :(  : "+e);
+			throw e;	
+		}		
+		return editar;
+	}
+	
+	public boolean EliminarEmp(int idEmpleado)throws Exception{
+		
+		boolean eliminar = false;
+		try {
+			eliminar = daoEmpleado.Instancia().EliminarEmpleado(idEmpleado);
+			System.out.println("(Negocio)Se Elimino Oficina... ");
+			
+		} catch (Exception e) {				
+			System.out.println("(Negocio)Nose puede Eliminar la Oficina !!!!!! :(  : "+e);
+			throw e;
+	}
+	return eliminar;		
+	}
+	
+	public entEmpleado devolverEmpId(int  idEmpleado)throws Exception{
+		
+		entEmpleado emp= null;
+		try {
+			emp = daoEmpleado.Instancia().devolverEmpId(idEmpleado);		
+			System.out.println("(Negocio)devolverOficinaId exitoso... ");
+		} catch (Exception e) {				
+			System.out.println("(Negocio)Error al devolverOficinaId !!!!!! :(  : "+e);
+			throw e;	
+		}
+		return emp;
+	}
+	
+}

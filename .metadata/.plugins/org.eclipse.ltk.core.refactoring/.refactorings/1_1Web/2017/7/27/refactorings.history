@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;1_1Web/src/main/webapp/WEB-INF/resources/assets/img/favicon.ico&apos; to &apos;extasis.ico&apos;" description="Rename resource &apos;favicon.ico&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/WEB-INF/resources/assets/img/favicon.ico" name="extasis.ico" stamp="1498898851467" updateReferences="true"/>
+</session>

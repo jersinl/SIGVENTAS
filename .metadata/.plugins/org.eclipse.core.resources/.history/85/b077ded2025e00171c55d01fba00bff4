@@ -1,0 +1,53 @@
+package negocios;
+
+import java.util.ArrayList;
+
+import datos.daoEmpleado;
+import entidades.entEmpleado;
+
+public class negEmpleado {
+
+	public static negEmpleado _Instancia;
+	private negEmpleado() {};
+	public static negEmpleado Instancia() {
+		if (_Instancia == null) {
+			_Instancia = new negEmpleado();
+		}
+		return _Instancia;
+	}
+	//
+	
+	
+	
+	public entEmpleado VerificarAcceso(String _Usuario, String _Pass) throws Exception {
+		try {
+			entEmpleado u = daoEmpleado.Instancia().VerificarAcceso(_Usuario, _Pass);
+			java.util.Date fechaActual = new java.util.Date();
+			
+			System.out.println(fechaActual);
+			
+			if(u!=null){
+				if(u.getFechaTermino().before(fechaActual)){
+					throw new ArithmeticException("Su usuario no esta dentro de la fecha Limite");
+				}
+			}else{
+				throw new ArithmeticException("usuario o password no valido");	
+			}
+			return u;
+			
+		} catch (Exception e) {
+			throw e; 
+		}
+	}
+	
+	public ArrayList<entEmpleado> ListarEmpleados()throws Exception{
+		try {
+			ArrayList<entEmpleado> o = daoEmpleado.Instancia().ListarEmpleados();
+			System.out.println("(Negocio)Listado ok... ");
+			return o;
+		} catch (Exception e) {
+			throw e; 
+		}
+	
+	}
+}

@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
+</div>
+                <!--End Page Header -->
+            </div>        
+
+        </div>
+        <!-- end page-wrapper -->
+
+    </div>
+    <!-- end wrapper -->
+
+
+	<spring:url value="/resources/assets/plugins/dataTables/jquery.dataTables.js" var="JQDataTables"/>
+    <spring:url value="/resources/assets/plugins/dataTables/dataTables.bootstrap.js" var="JQDTBoostraps"/>
+    
+
+
+	<spring:url value="/resources/assets/plugins/jquery-1.10.2.js" var="jquery1102JS" />
+    <spring:url value="/resources/assets/plugins/bootstrap/bootstrap.min.js" var="bootstrapJS" />
+    <spring:url value="/resources/assets/plugins/metisMenu/jquery.metisMenu.js" var="jqueryMetisMenuJS"/>
+    <spring:url value="/resources/assets/plugins/pace/pace.js" var="paceJS" />
+    <spring:url value="/resources/assets/scripts/siminta.js" var="simintaJS" />
+    <!-- Core Scripts - Include with every page -->
+    <script src="${jquery1102JS}" type="text/javascript"></script>
+    <script src="${bootstrapJS}" type="text/javascript"></script>
+    <script src="${jqueryMetisMenuJS}" type="text/javascript"></script>
+    <script src="${paceJS}" type="text/javascript"></script>
+    <script src="${simintaJS}" type="text/javascript"></script>
+    <script src="${JQDataTables}" type="text/javascript"></script>
+    <script src="${JQDTBoostraps}" type="text/javascript"></script>
+
+</body>
+
+</html>

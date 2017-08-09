@@ -1,0 +1,3 @@
+<%@page import="com.cibertec.edu.EmpleadoController"%>
+<%@page import="entidades.entEmpleado"%>
+

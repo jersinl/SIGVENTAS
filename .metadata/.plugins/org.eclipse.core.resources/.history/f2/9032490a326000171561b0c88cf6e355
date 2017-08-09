@@ -1,0 +1,73 @@
+<%@page import="entidades.entEmpleado"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="frm" %> 
+     
+<jsp:include page="/WEB-INF/views/includes/masterHeader.jsp"></jsp:include>
+				<!-- /.TODO EL CONTENIDO DE LA PAGINA-->
+<h1 class="page-header">Empleados</h1>
+
+<frm:form role="form" method="POST" action="GrabarEditar"> 
+	<div class="form-group"> 
+		<frm:input path="idEmpleado" style="display:none"></frm:input>    
+	</div>             
+    <div class="form-group">
+        <frm:input  path="usuario" class="form-control" placeholder="Usuario"></frm:input>
+    </div>   
+    <div class="form-group">
+        <frm:input class="form-control" placeholder="Password" path="password"></frm:input>
+    </div> 
+    <div class="form-group">
+        <frm:label path="fechaTermino">Fecha de Termino</frm:label>
+        <frm:input class="form-control" type="date" path="fechaTermino"></frm:input>
+    </div>  
+    <div class="form-group">
+        <frm:input class="form-control" placeholder="DNI" path="idPersona.dni"></frm:input>
+    </div>
+    <div class="form-group">
+        <frm:input class="form-control" placeholder="Nombres" path="idPersona.nombres"></frm:input>
+    </div> 
+     <div class="form-group">
+        <frm:input class="form-control" placeholder="Apellidos" path="idPersona.apellidos"></frm:input>
+    </div>
+    <div class="form-group">
+        <frm:label path="idPersona.sexo">Sexo</frm:label>
+        <frm:select class="form-control" path="idPersona.sexo">
+            <frm:option value="M">Masculino</frm:option>
+            <frm:option value="F">Femenino</frm:option>
+        </frm:select>
+    </div>
+    <div class="form-group">
+        <frm:label path="idPersona.fechaNacimiento">Fecha de Nacimiento</frm:label>
+        <frm:input class="form-control" type="date" placeholder="fecha de Nacimiento" path="idPersona.fechaNacimiento"></frm:input>
+    </div> 
+     <div class="form-group">
+        <frm:input class="form-control" placeholder="Telefono" type="tel" path="idPersona.telefono"></frm:input>
+    </div>
+    <div class="form-group">
+        <frm:input class="form-control" placeholder="Correo" type="email" path="idPersona.correo"></frm:input>
+    </div>
+    <div class="form-group">
+        <frm:input class="form-control" placeholder="Cargo" path="idCargo.idCargo"></frm:input>
+    </div>
+    <div class="form-group">
+        <frm:label path="idSucursal.idSucursal">Sucursal</frm:label>
+        <frm:select class="form-control" path="idSucursal.idSucursal">
+            <frm:option value="1" label="Tienda 1"></frm:option>
+            <frm:option value="2" label="Tienda 2"></frm:option>
+            <frm:option value="3" label="Tienda 3"></frm:option>
+        </frm:select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary btn-circle btn-xl" title="Editar"><i class="fa fa-check"></i></button>
+    
+    <a href="${pageContext.request.contextPath}/Empleados/Lista">
+    <button type="reset" class="btn btn-danger btn-circle btn-xl" title="Cancelar"><i class="fa fa-times"></i></button>
+    </a>
+    
+</frm:form>
+		   
+				   
+				   
+				   
+<jsp:include page="/WEB-INF/views/includes/masterFooter.jsp"></jsp:include>

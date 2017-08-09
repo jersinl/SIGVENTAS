@@ -1,0 +1,32 @@
+package com.cibertec.edu;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import entidades.entSucursal;
+import negocios.negSucursales;
+
+@Controller
+public class SucursalController {
+
+	@RequestMapping(value = "/Sucursal/Lista", method = RequestMethod.GET)
+	public ModelAndView Lista(HttpServletRequest req) {		
+		ModelAndView m = new ModelAndView("");	//ruta dentro del WEB-INF
+		try {
+			ArrayList<entSucursal> listita = 
+					negSucursales.Instancia().ListarSucursales();
+			m.addObject("lista", listita);
+			req.setAttribute("listita", listita);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return m;
+	}
+}
