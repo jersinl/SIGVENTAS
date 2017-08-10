@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import datos.Conexion;
 import entidades.entEmpleado;
 import negocios.negEmpleado;
 
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 
 public class frmLogin extends JFrame {
@@ -32,6 +34,8 @@ public class frmLogin extends JFrame {
 				try {
 					frmLogin frame = new frmLogin();
 					frame.setVisible(true);
+				
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

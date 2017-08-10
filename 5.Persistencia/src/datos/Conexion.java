@@ -20,21 +20,21 @@ public class Conexion {
 
 
 	public Connection getConnection() throws Exception {
-		Connection con = null;
+	
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			//Class.forName("com.mysql.jdbc.Driver");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_jonatan","root","mysql");
-			
-		    con=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"+
-									"databaseName=BD_Jonatan","sa","sql");
+			//Cn Server Develop
+			Connection cn = DriverManager.getConnection("jdbc:sqlserver://sigventas.database.windows.net;databaseName=SIGVENTAS","dba","Casa123%");
             	    System.out.println("Conexion a Base de Datos ...Ok");
+            	    return cn;
 		} catch (Exception e) {
 			System.out.println("Error Conexion a la BD " + e.getMessage());
 			e.printStackTrace();
+			
 			System.out.println(e);
+			throw e;
 		}
-		return con;
+	
 	}
 	
 }
