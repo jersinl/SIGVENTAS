@@ -34,37 +34,37 @@ public class daoEmpleado {
 			ResultSet rs = cst.executeQuery();
 			if (rs.next()) {
 				u = new entEmpleado();
-				u.setIdEmpleado(rs.getInt("idEmpleado"));
-				u.setUsuario(rs.getString("usuario"));
-				u.setPassword(rs.getString("password"));
-				u.setFechaIngreso(rs.getDate("fechaIngreso"));
-				u.setFechaTermino(rs.getDate("fechaTermino"));
-				u.setEstado(rs.getString("estado"));
+				u.setIdEmpleado(rs.getInt(1));
+				u.setUsuario(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setFechaIngreso(rs.getDate(4));
+				u.setFechaTermino(rs.getDate(5));
+				u.setEstado(rs.getBoolean(6));
 					entPersona c = new entPersona();
-					c.setIdPersona(rs.getInt("idPersona"));
-					c.setDni(rs.getString("dni"));
-					c.setNombres(rs.getString("Nombre"));
-					c.setApellidos(rs.getString("Apellidos"));
+					c.setIdPersona(rs.getInt(7));
+					c.setDni(rs.getString(8));
+					c.setNombres(rs.getString(9));
+					c.setApellidos(rs.getString(10));
 					entGenero sexo = new entGenero();
-					sexo.setIdgenero(rs.getInt("id"));
-					sexo.setNombre(rs.getString("descripcion"));
-					sexo.setResumido(rs.getString("resumido"));
+					sexo.setIdgenero(rs.getInt(11));
+					sexo.setNombre(rs.getString(12));
+					sexo.setResumido(rs.getString(13));
 					c.setSexo(sexo);
-					c.setFechaNacimiento(rs.getDate("fechaNacimiento"));
-					c.setTelefono(rs.getInt("telefono"));
-					c.setCorreo(rs.getString("correo"));
+					c.setFechaNacimiento(rs.getDate(14));
+					c.setTelefono(rs.getInt(15));
+					c.setCorreo(rs.getString(16));
 				u.setIdPersona(c);
 					entCargo car =  new entCargo();
-					car.setIdCargo(rs.getInt("idCargo"));
-					car.setNombre(rs.getString("Nombre"));
-					car.setSueldo(rs.getDouble("sueldo"));
-					car.setIngreso(rs.getTime("Ingreso"));
-					car.setSalida(rs.getTime("Salida"));
+					car.setIdCargo(rs.getInt(17));
+					car.setNombre(rs.getString(18));
+					car.setSueldo(rs.getDouble(19));
+					car.setIngreso(rs.getTime(20));
+					car.setSalida(rs.getTime(21));
 				u.setIdCargo(car);
 					entSucursal s = new entSucursal();
-					s.setIdSucursal(rs.getInt("idSucursal"));
-					s.setNombre(rs.getString("Nombre"));
-					s.setDireccion(rs.getString("Direccion"));
+					s.setIdSucursal(rs.getInt(22));
+					s.setNombre(rs.getString(23));
+					s.setDireccion(rs.getString(24));
 				u.setIdSucursal(s);
 					
 				System.out.println("Usuario ok!");
@@ -98,7 +98,7 @@ public class daoEmpleado {
 			emp.setPassword(rs.getString(3));
 			emp.setFechaIngreso(rs.getDate(4));
 			emp.setFechaTermino(rs.getDate(5));
-			emp.setEstado(rs.getString(6));
+			emp.setEstado(rs.getBoolean(6));
 				entPersona p = new entPersona();
 				p.setIdPersona(rs.getInt(7));
 				p.setDni(rs.getString(8));
@@ -247,6 +247,31 @@ public class daoEmpleado {
 	
 	}
 	
+	public boolean DarBajaEmpleado(int idEmpleado)throws Exception{
+		Connection cn = null;
+		CallableStatement cstm = null;
+		boolean eliminar = false;
+	try {
+		cn = Conexion.Instancia().getConnection();
+		cstm = cn.prepareCall("{call spCambiarEstado(?)}");
+		cstm.setInt(1,idEmpleado);
+				
+		int x = cstm.executeUpdate();
+		if(x>0){eliminar = true;}
+		
+		System.out.println("(Persistencia)Se Dio de baja Empleado... ");
+		
+	} catch (Exception e) {				
+		System.out.println("(Persistencia)Nose puede Dar de baja el Empleado !!!!!! :(  : "+e);
+		throw e;
+	}finally{
+		cn.close();
+		cstm.close();
+	}
+	return eliminar;
+	
+	}
+	
 
 	public entEmpleado devolverEmpId(int  idEmp)throws Exception{
 		Connection cn = null;
@@ -267,7 +292,7 @@ public class daoEmpleado {
 			emp.setPassword(rs.getString(3));
 			emp.setFechaIngreso(rs.getDate(4));
 			emp.setFechaTermino(rs.getDate(5));
-			emp.setEstado(rs.getString(6));
+			emp.setEstado(rs.getBoolean(6));
 				entPersona p = new entPersona();
 				p.setIdPersona(rs.getInt(7));
 				p.setDni(rs.getString(8));

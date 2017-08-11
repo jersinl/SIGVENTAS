@@ -6,6 +6,10 @@ import datos.daoEmpleado;
 import entidades.entEmpleado;
 
 public class negEmpleado {
+	
+	
+
+	
 
 	public static negEmpleado _Instancia;
 	private negEmpleado() {};
@@ -30,8 +34,15 @@ public class negEmpleado {
 				if(u.getFechaTermino().before(fechaActual)){
 					throw new ArithmeticException("Su usuario no esta dentro de la fecha Limite");
 				}
+				
+				if(u.getEstado()==false){
+					throw new ArithmeticException("Su usuario esta inactivo.");
+				}
+				
 			}else{
-				throw new ArithmeticException("usuario o password no valido");	
+				throw new ArithmeticException("Usuario y Password no validos.");
+			
+
 			}
 			return u;
 			
@@ -90,7 +101,19 @@ public class negEmpleado {
 	}
 	return eliminar;		
 	}
-	
+	public boolean DarBajaEmp(int idEmpleado)throws Exception{
+		
+		boolean eliminar = false;
+		try {
+			eliminar = daoEmpleado.Instancia().DarBajaEmpleado(idEmpleado);
+			System.out.println("(Negocio)Se Dio  de baja Oficina... ");
+			
+		} catch (Exception e) {				
+			System.out.println("(Negocio)Nose puede Dar de baja la Oficina !!!!!! :(  : "+e);
+			throw e;
+	}
+	return eliminar;		
+	}
 	public entEmpleado devolverEmpId(int  idEmpleado)throws Exception{
 		
 		entEmpleado emp= null;

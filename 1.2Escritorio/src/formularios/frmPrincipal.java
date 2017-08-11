@@ -6,16 +6,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import entidades.entEmpleado;
+import metodosComunes.ImagenFondo;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import java.awt.Font;
+import java.awt.MenuBar;
+
 import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class frmPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JDesktopPane jdpContenedor;
+	private JMenuBar menuBar;
 
 	/**
 	 * Launch the application.
@@ -26,6 +37,9 @@ public class frmPrincipal extends JFrame {
 				try {
 					frmPrincipal frame = new frmPrincipal();
 					frame.setVisible(true);
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,12 +51,18 @@ public class frmPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public frmPrincipal() {
-		setTitle("SIG VENTAS");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(frmPrincipal.class.getResource("/imagenes/categoria.jpg")));
+		setTitle("SIG VENTAS  - EXTASIS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 930, 544);
 		
-		JMenuBar menuBar = new JMenuBar();
+		
+	
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		
+		
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.setIcon(new ImageIcon(frmPrincipal.class.getResource("/imagenes/registrar.jpg")));
@@ -206,11 +226,18 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca De");
 		mntmAcercaDe.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		mnAyuda.add(mntmAcercaDe);
+	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		jdpContenedor = new JDesktopPane();
+		jdpContenedor.setBackground(new Color(102, 153, 255));
+		jdpContenedor.setBounds(0, 0, 1362, 657);
+
+		contentPane.add(jdpContenedor, BorderLayout.CENTER);
+		jdpContenedor.setBorder(new ImagenFondo());
 		this.setExtendedState(MAXIMIZED_BOTH);
 	}
-
 }

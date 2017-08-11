@@ -14,7 +14,7 @@ public class entEmpleado {
 	private entPersona idPersona; 
 	private String usuario;
 	private String password;
-	private String estado;
+	private Boolean estado;
 	private Date fechaIngreso;
 	private Date fechaTermino;
 	private entCargo idCargo;
@@ -57,10 +57,10 @@ public class entEmpleado {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 	public Date getFechaIngreso() {

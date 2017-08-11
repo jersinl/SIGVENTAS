@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
+import java.awt.event.MouseEvent;
 
 public class frmLogin extends JFrame {
 
@@ -32,6 +34,8 @@ public class frmLogin extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtPassword;
 	private JButton btnIngresar;
+	private JLabel lblOlvido;
+
 
 	/**
 	 * Launch the application.
@@ -50,13 +54,16 @@ public class frmLogin extends JFrame {
 			}
 		});
 	}
+	
+
+
 
 	/**
 	 * Create the frame.
 	 */
 	public frmLogin() {
 		setResizable(false);
-		setTitle("Sistema de Ventas Fashon Like");
+		setTitle("Sistema de Ventas EXTASIS");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(frmLogin.class.getResource("/imagenes/iconoLogin.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 200, 406, 229);
@@ -83,12 +90,14 @@ public class frmLogin extends JFrame {
 				if(txtUsuario.getText().equals("")){
 					getToolkit().beep();
 					JOptionPane.showMessageDialog(null,"Ingrese un nombre de usuario por favor" , "Sistema Ventas",JOptionPane.OK_OPTION);
+					txtUsuario.requestFocus();
 							return;
 						}
 						
 						if (txtPassword.getText().equals("")){
 							getToolkit().beep();
 							JOptionPane.showMessageDialog(null,"Ingrese una contraseña por favor" , "Sistema Ventas",JOptionPane.OK_OPTION);
+							txtPassword.requestFocus();
 							return;
 							
 						}
@@ -96,14 +105,35 @@ public class frmLogin extends JFrame {
 						
 						try{					
 //							
-				
-							entEmpleado ux = negEmpleado.Instancia().VerificarAcceso(txtUsuario.getText(),txtPassword.getText());
+							entEmpleado	ux = negEmpleado.Instancia().VerificarAcceso(txtUsuario.getText(),txtPassword.getText());
 							JOptionPane.showMessageDialog(null, "Bienvenido : "+ux.getIdPersona().getNombres()+ " "+ux.getIdPersona().getApellidos(), 
 									"Login",JOptionPane.INFORMATION_MESSAGE);
-							dispose();
-							frmPrincipal frm = new frmPrincipal();
-							frm.show();
+
+							
+							if(ux.getIdCargo().getNombre().equals("operario")){
+								frmPrincipal frm = new frmPrincipal();
+								frm.getJMenuBar().getComponentAtIndex(1).setVisible(false);
+								frm.getJMenuBar().getComponentAtIndex(2).setVisible(false);
+								frm.show();
+								dispose();
+							return;
+							}
+							
+							if(ux.getIdCargo().getNombre().equals("administrador")){
+								frmPrincipal frm = new frmPrincipal();
 								
+								frm.show();
+								dispose();
+							return;
+								
+							}
+								
+							
+					
+							
+							
+							
+							
 			
 						}
 							catch(Exception e){
@@ -135,11 +165,21 @@ public class frmLogin extends JFrame {
 		btnSalir.setBounds(127, 149, 89, 23);
 		contentPane.add(btnSalir);
 		
-		JLabel lblCambiarContrasena = new JLabel("Cambiar Contrase\u00F1a");
-		lblCambiarContrasena.setForeground(SystemColor.textHighlight);
-		lblCambiarContrasena.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblCambiarContrasena.setBounds(252, 150, 146, 20);
-		contentPane.add(lblCambiarContrasena);
+		lblOlvido = new JLabel("Cambiar Contrase\u00F1a");
+		lblOlvido.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frmRecuperarContrasena c = new frmRecuperarContrasena();
+				c.show();
+				dispose();
+			}
+		});
+		lblOlvido.setForeground(SystemColor.textHighlight);
+		lblOlvido.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		lblOlvido.setBounds(252, 150, 146, 20);
+		contentPane.add(lblOlvido);
+
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(frmLogin.class.getResource("/imagenes/for.jpg")));
