@@ -1,9 +1,9 @@
 package entidades;
 
-public class entArticuloDescripcion {
+public class entPrendaDescripcion {
 	
 	private entDescripcion idDescripcion;
-	private entArticulo idArticulo;
+	private entPrenda idArticulo;
 	
 	public entDescripcion getIdDescripcion() {
 		return idDescripcion;
@@ -11,12 +11,13 @@ public class entArticuloDescripcion {
 	public void setIdDescripcion(entDescripcion idDescripcion) {
 		this.idDescripcion = idDescripcion;
 	}
-	public entArticulo getIdArticulo() {
+	public entPrenda getIdArticulo() {
 		return idArticulo;
 	}
-	public void setIdArticulo(entArticulo idArticulo) {
+	public void setIdArticulo(entPrenda idArticulo) {
 		this.idArticulo = idArticulo;
 	}
+
 	
 	
 

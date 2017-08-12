@@ -4,7 +4,15 @@ public class entModelo {
 
 	private int idModelo;
 	private String nombre;
+	private int idMarca;
 	
+	
+	public int getIdMarca() {
+		return idMarca;
+	}
+	public void setIdMarca(int idMarca) {
+		this.idMarca = idMarca;
+	}
 	public int getIdModelo() {
 		return idModelo;
 	}
@@ -18,5 +26,9 @@ public class entModelo {
 		this.nombre = nombre;
 	}
 	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 	
 }

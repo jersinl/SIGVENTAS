@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -21,6 +22,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class frmPrincipal extends JFrame {
 
@@ -153,6 +156,15 @@ public class frmPrincipal extends JFrame {
 		mnIngreso.add(separator_7);
 		
 		JMenuItem mntmProducto_1 = new JMenuItem("Producto");
+		mntmProducto_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JInternalFrame frm = new ifrmIngresar();
+				jdpContenedor.add(frm);
+				frm.setVisible(true);
+				
+			}
+		});
 		mntmProducto_1.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		mnIngreso.add(mntmProducto_1);
 		
